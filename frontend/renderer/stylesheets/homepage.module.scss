@@ -1,0 +1,18 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: white;
+
+.contact{
+  text-align: center;
+  input{
+      border: 2px solid;
+      border-radius: 4px;
+      font-size: 20px;
+      font-family: 'Times New Roman', Times, serif;
+      text-align: center;
+      margin: 0.25rem;
+      min-width: 300px;
+      min-height: 35px;
+      padding: 0.5rem;
+      //transition: background-color 0.5s ease-out;
+  }
+}

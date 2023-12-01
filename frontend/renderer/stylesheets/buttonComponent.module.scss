@@ -1,0 +1,44 @@
+$loaderAnimationDuration: 0.4s;
+@keyframes loader {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+.button {
+  width: 100px; height: 50px;
+  background: orange;
+  border-radius: 10px;
+  will-change: transform;
+  transition: all 0.2s ease;
+  //border: 2px solid maroon;
+  color: white;
+  font-size: 16px;
+  &:hover {
+    background: #D03D56;
+    color: #ffffff;
+  }
+  &.loader {
+    border-right: 2px solid #ffffff;
+    transform: translateY(1px);
+    font-size: 0;
+    animation: loader $loaderAnimationDuration linear infinite;
+    width: 50px;
+    border-radius: 25px;
+    background: transparent;
+  }
+  &.success {
+    background: #3bb873;
+    //border-color: #3bb873;
+    font-size: 14px;
+    color: #ffffff;
+  }
+  &.error{
+    background: orange;
+    border-color: orange;
+    font-size: 14px;
+    color: #ffffff;
+  }
+}
