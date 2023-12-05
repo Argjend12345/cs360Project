@@ -21,7 +21,11 @@ function addEmployee() {
   const [password, setPassword]   = useState('');
   const [name, setName]   = useState('');
   const [hourlyPay, setHourlyPay]   = useState('');
-  const [hidden, setHidden] = useState(false);
+
+  //Button states
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError]     = useState(false);
 
   // Store days of the week
   const [selectedDays, setSelectedDays] = useState({
@@ -54,6 +58,7 @@ function addEmployee() {
   ];
 
   // Hide / unhide styles
+  const [hidden, setHidden] = useState(false);
   const hideStyle = {
     display: hidden ? 'none' : ''
   };
@@ -69,9 +74,15 @@ function addEmployee() {
   };
 
   // Submit button function
-  function getInput() {
-    setHidden(true)
-    handleEmployeePost(name, username, password, selectedRole, hourlyPay);
+  function createClient() 
+  {
+    //Need to check if inputs are valid/empty before posting...
+    if(handleEmployeePost(name, username, password, selectedRole, hourlyPay))
+    {
+      
+    }else{
+      //Display unsuccessful event ~ returned false. 
+    }
   }
 
   return (
@@ -85,7 +96,7 @@ function addEmployee() {
         <h2>Add Employee Information</h2>
       
         <div className={Styles2.dropdown}>
-          <button style={hideStyle} className="dropdown-toggle" onClick={toggleDropdown}>
+          <button style={{width:"100px", height: "30px"}} className="dropdown-toggle" onClick={toggleDropdown}>
             {selectedRole || 'Select a role'}
           </button>
           {isOpen && (
@@ -99,51 +110,44 @@ function addEmployee() {
           )}
         </div>
 
-        <div className={Styles.contact}>
-          <input type="text" id="name" placeholder='Name' onChange={(e) => setName(e.target.value)} style={hideStyle}/>
+        <div id="content1">
+          <div className={Styles.contact}>
+            <input type="text" id="name" placeholder='Name' onChange={(e) => setName(e.target.value)} style={hideStyle}/>
+          </div>
+          <div className={Styles.contact}>
+            <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)} style={hideStyle}/>
+          </div>
+          <div className={Styles.contact}>
+            <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)} style={hideStyle}/>
+          </div>
+          <div className={Styles.contact}>
+            <input type="text" placeholder='Hourly Pay'onChange={(e) => setHourlyPay(e.target.value)} style={hideStyle}/>
+          </div>
+          <div style={{textAlign: 'center'}}>   
+            <button id="submitB" onClick={createClient} className={`${Styles1.button} ${isLoading ? Styles1.loader : ''} ${isSuccess ? Styles1.success : ''} ${isError ? Styles1.error : ''}`} style={{height: "50px", width: "100px"}}>
+                {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
+            </button> 
+          </div>
         </div>
 
-        <div className={Styles.contact}>
-          <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)} style={hideStyle}/>
-        </div>
-
-        <div className={Styles.contact}>
-          <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)} style={hideStyle}/>
-        </div>
-
-        <div className={Styles.contact}>
-          <input type="text" placeholder='Hourly Pay'onChange={(e) => setHourlyPay(e.target.value)} style={hideStyle}/>
-        </div>
-
-        <div style={{textAlign: "center"}}>
-          <h2 style={showStyle}>Select Employee's Shifts for the Week</h2>
-          {Object.keys(selectedDays).map((day) => (
-            <div style={showStyle} key={day}>
-              <label style={showStyle}>
-                <input
-                  type="checkbox"
-                  checked={selectedDays[day]}
-                  onChange={() => handleCheckboxChange(day)}
-                />
+        <div id="content2" style={{textAlign: "center", display:'none'}}>
+          <h2>Select Employee's Shifts for the Week</h2>
+          {Object.keys(selectedDays).map((day) => 
+          (
+            <div key={day}>
+              <label>
+                <input type="checkbox" checked={selectedDays[day]} onChange={() => handleCheckboxChange(day)}/>
                 {day}
               </label>
+            </div>
+          ))}
+          <div>
+            <p>Selected Days: {Object.keys(selectedDays).filter((day) => selectedDays[day]).join(', ')}</p>
+          </div>
         </div>
-        ))}
-        <div>
-          <p style={showStyle}>Selected Days: {Object.keys(selectedDays).filter((day) => selectedDays[day]).join(', ')}</p>
-        </div>
-        </div>
-      </div>
 
-      <div style={{textAlign: 'center'}}>   
-        <button onClick={getInput} className={`${Styles1.button}`}>
-            Submit
-        </button>
-
-        <button onClick={cancel} className={`${Styles1.button}`}>
-            Cancel
-        </button>
       </div>
+    
       </React.Fragment>
   )
 }
@@ -166,9 +170,10 @@ const handleEmployeePost = async (name, username, password, selectedRole, hourly
         }
       }
     );
-
     console.log(response.data);
-    
+    //If successful ~ loading content2 and hiding content1 
+    document.getElementById("content1").style.display = "none";
+    document.getElementById("content2").style.display = "inline";
     return true;
   } catch (error) {
     console.log(error);
