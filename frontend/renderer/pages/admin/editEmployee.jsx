@@ -10,9 +10,11 @@ const { ipcRenderer } = require('electron');
 
 function editEmployee() {
 
+  // Cancel button
   const cancel = () => {
       Router.push('/admin/adminHome');    
   }
+
   //Storing employee data
   const [selectedRole, setSelectedRole] = useState(null);
   const [username, setUsername]   = useState('');
@@ -20,27 +22,56 @@ function editEmployee() {
   const [name, setName]   = useState('');
   const [hourlyPay, setHourlyPay]   = useState('');
 
+  // Store days of the week
+  const [selectedDays, setSelectedDays] = useState({
+    Monday: false,
+    Tuesday: false,
+    Wednesday: false,
+    Thursday: false,
+    Friday: false,
+    Saturday: false,
+    Sunday: false,
+  });
+
+    // Checkbox function
+  const handleCheckboxChange = (day) => {
+    setSelectedDays((prevSelectedDays) => ({
+      ...prevSelectedDays,
+      [day]: !prevSelectedDays[day],
+    }));
+  };
+
+  // Role functions
   const roles = [
     'Employee',
     'Admin',
     'Accountant',
   ];
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
   const selectRole = (role) => {
     setSelectedRole(role);
     setIsOpen(false);
   };
 
+  // Dropdown functions
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Hide / unhide styles
+  const [hidden, setHidden] = useState(false);
+  const hideStyle = {
+    display: hidden ? 'none' : ''
+  };
+  const showStyle = {
+    display: hidden ? '' : 'none'
+  }
+
   function getInput()
   {
-      getEmployeeById(1);
-      //handleEmployeePost(name, username, password, selectedRole, hourlyPay);
+    setHidden(true)
+    getEmployeeById(1);
+    //handleEmployeePost(name, username, password, selectedRole, hourlyPay);
   }
 
 
@@ -53,15 +84,19 @@ function editEmployee() {
       <div style={{textAlign: "center"}}>
         <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
         <h2>Edit Employee Information</h2>
+
+        <div className={Styles.contact}>
+            <input style={hideStyle} type="text" placeholder='UserId'/>
+        </div>
       
         <div className={Styles2.dropdown}>
-          <button className="dropdown-toggle" onClick={toggleDropdown}>
+          <button style={showStyle} className="dropdown-toggle" onClick={toggleDropdown}>
             {selectedRole || 'Select a role'}
           </button>
           {isOpen && (
-            <ul className={Styles2.dropdownMenu} style={{position: "absolute"}}>
+            <ul className={Styles2.dropdownMenu} style={showStyle}>
               {roles.map((role, index) => (
-                <li key={index} onClick={() => selectRole(role)}>
+                <li style={showStyle} key={index} onClick={() => selectRole(role)}>
                   {role}
                 </li>
               ))}
@@ -70,19 +105,38 @@ function editEmployee() {
         </div>
 
         <div className={Styles.contact}>
-          <input type="text" id="name" placeholder='Name' onChange={(e) => setName(e.target.value)}/>
+          <input type="text" id="name" placeholder='Name' onChange={(e) => setName(e.target.value)} style={showStyle}/>
         </div>
 
         <div className={Styles.contact}>
-          <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)}/>
+          <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)} style={showStyle}/>
         </div>
 
         <div className={Styles.contact}>
-          <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
+          <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)} style={showStyle}/>
         </div>
 
         <div className={Styles.contact}>
-          <input type="text" placeholder='Hourly Pay'onChange={(e) => setHourlyPay(e.target.value)}/>
+          <input type="text" placeholder='Hourly Pay'onChange={(e) => setHourlyPay(e.target.value)} style={showStyle}/>
+        </div>
+
+        <div style={{textAlign: "center"}}>
+          <h2 style={showStyle}>Select Employee's Shifts for the Week</h2>
+          {Object.keys(selectedDays).map((day) => (
+            <div style={showStyle} key={day}>
+              <label style={showStyle}>
+                <input
+                  type="checkbox"
+                  checked={selectedDays[day]}
+                  onChange={() => handleCheckboxChange(day)}
+                />
+                {day}
+              </label>
+        </div>
+        ))}
+        <div>
+          <p style={showStyle}>Selected Days: {Object.keys(selectedDays).filter((day) => selectedDays[day]).join(', ')}</p>
+        </div>
         </div>
       </div>
 
