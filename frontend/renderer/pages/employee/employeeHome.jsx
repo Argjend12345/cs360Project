@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Styles1 from '../../stylesheets/buttonComponent.module.scss';
+import Styles2 from '../../stylesheets/alert.module.scss';
 import Router  from 'next/router';
+import '../../stylesheets/alert.module.scss';
+import securityQuestions from './securityQuestions';
+
 
 function employeeHome() {
 
-  const logOut = async () => {
-    try {
-        Router.push('/loginPage');    
-    }
-    catch (error) {
-      console.error(error);
-    }
+  const logOut = () => {
+    Router.push('/loginPage');    
   }
 
-  const alertUser = async () => {
-    try {
-        window.alert("Clocked in")   
-    }
-    catch (error) {
-      console.error(error);
-    }
+  const viewPaystub = () => {
+    Router.push('/employee/viewPaystubs');    
+  }
+
+  const securityQuestions = () => {
+    Router.push('/employee/securityQuestions');    
+  }
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const alertUser = () => {
+    setIsVisible(true);
+
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000);
   }
 
   return (
@@ -30,11 +38,17 @@ function employeeHome() {
         <title>Employee View</title>
       </Head>
 
+      {isVisible && (
+        <div className={`${Styles2.alert}`}>
+          You are clocked in /out!
+        </div>
+      )}
+
       <div style={{textAlign: "right"}}>
         <button onClick={logOut} className={`${Styles1.button}`}>
           Log out
         </button>
-        </div>
+      </div>
 
       <div style={{textAlign: "center"}}>
         <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
@@ -43,12 +57,18 @@ function employeeHome() {
       <div style={{textAlign: "center"}}>
         <h1>Hello Employee!</h1>
 
-        <button onClick={(alertUser)}className={`${Styles1.button}`} style={{padding: "20px", marginLeft: "10px"}}>
+        <button onClick={(alertUser)}className={`${Styles1.button}`} style={{padding: "40px"}}>
           Clock In / Clock Out
         </button>
 
-        <button className={`${Styles1.button}`} style={{padding: "20px", marginLeft: "10px"}}>
+        <button onClick={(viewPaystub)} className={`${Styles1.button}`} style={{padding: "40px", marginLeft: "20px"}}>
           View Paystub
+        </button>
+      </div>
+      
+      <div style={{textAlign: "center"}}>
+        <button onClick={(securityQuestions)} className={`${Styles1.button}`} style={{padding: "40px", marginTop: "10px"}}>
+          Change Security Questions
         </button>
       </div>
 
