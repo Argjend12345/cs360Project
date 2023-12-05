@@ -37,6 +37,13 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
+    public void editEmployee(Employee employee, int id)
+    {
+        Employee e = employeeRepository.findById(id).stream().findFirst().get();
+        e = employee;
+        employeeRepository.save(e);
+    }
+
     public void removeEmployee(int id)
     {
         employeeRepository.deleteById(id);

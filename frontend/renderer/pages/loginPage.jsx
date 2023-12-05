@@ -71,16 +71,13 @@ function loginPage() {
     }
   };
 
-  const logIn = async () => {
-    try {
-        Router.push('admin/adminHome');
-        //Router.push('employee/employeeHome');
-        //Router.push('accountant/accountantHome');
-    }
-    catch (error) {
-    console.error(error);
-    }
+  // REMOVE THIS FUNCTION
+  const logIn = () => {
+      Router.push('admin/adminHome');
+      //Router.push('employee/employeeHome');
+      //Router.push('accountant/accountantHome');
   }
+  // ----------------------------------------------------
 
   return (
     <React.Fragment>
@@ -109,9 +106,13 @@ function loginPage() {
       <div style={{paddingBottom: "15px"}}></div>
 
       <div style={{textAlign: 'center'}}>   
-        <button id="submitB" onClick={logIn} className={`${Styles1.button} ${isLoading ? Styles1.loader : ''} ${isSuccess ? Styles1.success : ''} ${isError ? Styles1.error : ''}`}>
+        <button id="submitB" onClick={logIn} className={`${Styles1.button} ${isLoading ? Styles1.loader : ''} ${isSuccess ? Styles1.success : ''} ${isError ? Styles1.error : ''}`} style={{height: "50px", width: "200px"}}>
           {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
         </button> 
+      </div>
+
+      <div style={{textAlign: 'center', marginTop: "12px"}}>   
+        <a href="/forgotPassword">Forgot your password?</a>
       </div>
 
     </React.Fragment>
@@ -138,4 +139,3 @@ const handleLogin = async (username, password) => {
 };
 
 export default loginPage;
-

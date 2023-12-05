@@ -6,13 +6,20 @@ import Router  from 'next/router';
 
 function accountantHome() {
 
-  const logOut = async () => {
-    try {
-        Router.push('/loginPage');    
-    }
-    catch (error) {
-      console.error(error);
-    }
+  const logOut = () => {
+    Router.push('/loginPage');    
+  }
+
+  const generatePaystub = () => {
+    Router.push('/accountant/generatePaystub');    
+  }
+
+  const retrievePaystub = () => {
+    Router.push('/accountant/retrievePaystub');    
+  }
+
+  const payEmployee = () => {
+    Router.push('/accountant/payEmployee');    
   }
 
   return (
@@ -25,7 +32,7 @@ function accountantHome() {
         <button onClick={logOut} className={`${Styles1.button}`}>
           Log out
         </button>
-        </div>
+      </div>
 
       <div style={{textAlign: "center"}}>
         <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
@@ -34,15 +41,15 @@ function accountantHome() {
       <div style={{textAlign: "center"}}>
 
         <h1>Hello Accountant!</h1>
-        <button className={`${Styles1.button}`} style={{padding: "20px", marginLeft: "10px"}}>
+        <button onClick={generatePaystub} className={`${Styles1.button}`} style={{padding: "40px", marginLeft: "10px"}}>
           Generate Paystub
         </button>
 
-        <button className={`${Styles1.button}`} style={{padding: "20px", marginLeft: "10px"}}>
+        <button onClick={retrievePaystub} className={`${Styles1.button}`} style={{padding: "40px", marginLeft: "10px"}}>
           Retrieve Paystub
         </button>
 
-        <button className={`${Styles1.button}`} style={{padding: "20px", marginLeft: "10px"}}>
+        <button onClick={payEmployee} className={`${Styles1.button}`} style={{padding: "40px", marginLeft: "10px"}}>
           Pay Employee
         </button>
       </div>

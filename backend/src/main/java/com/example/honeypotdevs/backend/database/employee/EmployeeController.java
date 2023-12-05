@@ -36,7 +36,7 @@ public class EmployeeController
         return employeeService.getAllEmployee();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value ="/employees")
+    @RequestMapping(method = RequestMethod.POST, value ="/employee")
     public int addClient(@RequestBody Employee employee)
     {
         System.out.println("You added a new client.");
@@ -48,6 +48,18 @@ public class EmployeeController
         }
 
         return 5;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/employee/{id}")
+    public Optional<Employee> getEmployeeById(@PathVariable int id)
+    {
+        return employeeService.getEmployeeById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/employee/{id}/edit")
+    public void editEmployee(@RequestBody Employee employee, @PathVariable int id)
+    {
+        employeeService.editEmployee(employee, id);
     }
 
     //employee/{id}/paystubs/create
