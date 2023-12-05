@@ -37,6 +37,7 @@ public class SecurityConfiguration
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
+        //http.cors();
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers( "/auth").anonymous()
@@ -45,12 +46,12 @@ public class SecurityConfiguration
                 .authorizeHttpRequests((authorize) -> authorize
                         .anyRequest().authenticated()
                 );
-        http.cors(cors -> cors.disable());
         http.csrf(AbstractHttpConfigurer::disable);
         http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
         auth.userDetailsService(customEmployeeDetailsService);

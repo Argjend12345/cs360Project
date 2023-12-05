@@ -24,21 +24,20 @@ public class Employee
 
     private String name;
 
-    private String address;
-
     private String username;
 
     private String password;
 
     private String role;
+    private String hourlyPay;
 
-    public Employee(String name, String address, String username, String password, String role)
+    public Employee(String name, String username, String password, String role, String hourlyPay)
     {
         this.name = name;
-        this.address = address;
         this.username = username;
         setPassword(password);
         this.role = role;
+        this.hourlyPay = hourlyPay;
     }
 
     public Employee() {
@@ -51,14 +50,6 @@ public class Employee
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getUsername() {
@@ -100,6 +91,14 @@ public class Employee
 
     public void setPaystubs(Set<Paystub> paystubs) {
         this.paystubs = paystubs;
+    }
+
+    public String getHourlyPay() {
+        return hourlyPay;
+    }
+
+    public void setHourlyPay(String hourlyPay) {
+        this.hourlyPay = hourlyPay;
     }
 
 }
