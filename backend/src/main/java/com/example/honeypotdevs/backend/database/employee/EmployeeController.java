@@ -1,5 +1,7 @@
 package com.example.honeypotdevs.backend.database.employee;
 
+import com.example.honeypotdevs.backend.database.paystub.Paystub;
+import com.example.honeypotdevs.backend.database.paystub.PaystubService;
 import com.example.honeypotdevs.backend.database.shift.Shift;
 import com.example.honeypotdevs.backend.database.shift.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class EmployeeController
 
     @Autowired
     private ShiftService shiftService;
+
+    @Autowired
+    private PaystubService paystubService;
 
     private AuthenticationManager authenticationManager;
 
@@ -40,16 +45,21 @@ public class EmployeeController
         return 5;
     }
 
-    //We could just call get employee, and splice the data from the json.
+    //employee/{id}/paystubs/create
 
+    @RequestMapping(method = RequestMethod.POST, value = "/employee/{id}/paystubs/create")
+    public void createEmployeePaystub(@RequestBody Paystub p, @PathVariable int id)
+    {
+        Optional<Employee> e = employeeService.getEmployeeById(id);//Getting the employee by passed id
+        e.ifPresent(p::setEmployee);
+        paystubService.addPaystub(p);
+    }
 
-    //Would be nice)
-        //I want an endpoint to get an employee's shifts. All of them.
-        //I want an endpoint to get an employee's specific shift data.
-
-    //Post request with shift object,
-
-
+    @RequestMapping(method = RequestMethod.GET, value = "/employee/{id}/paystubs")
+    public List<Paystub> getAllEmployeePaystubs(@PathVariable int id)
+    {
+        return paystubService.getEmployeePaystubs(id);
+    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/employee/{id}/shifts/update")
     public void updateEmployeeShift(@RequestBody Shift s, @PathVariable int id)
@@ -57,7 +67,6 @@ public class EmployeeController
         //Get employee object using the employee Id.
         Optional<Employee> e = employeeService.getEmployeeById(id);//Getting the employee by passed id
         e.ifPresent(s::setEmployee);
-
         shiftService.addShift(s);
     }
     @RequestMapping(method = RequestMethod.GET, value ="/employee/{id}/shifts")

@@ -1,12 +1,11 @@
 package com.example.honeypotdevs.backend.database.employee;
 
+import com.example.honeypotdevs.backend.database.paystub.Paystub;
 import com.example.honeypotdevs.backend.database.shift.Shift;
 import com.example.honeypotdevs.backend.security.AES256Encryption;
 import com.example.honeypotdevs.backend.security.SHA256Hashing;
 import jakarta.persistence.*;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,6 +19,8 @@ public class Employee
 
     @OneToMany(mappedBy="employee")
     private Set<Shift> shifts;
+    @OneToMany(mappedBy="employee")
+    private Set<Paystub> paystubs;
 
     private String name;
 
@@ -91,6 +92,14 @@ public class Employee
 
     public void setShifts(Set<Shift> shifts) {
         this.shifts = shifts;
+    }
+
+    public Set<Paystub> getPaystubs() {
+        return paystubs;
+    }
+
+    public void setPaystubs(Set<Paystub> paystubs) {
+        this.paystubs = paystubs;
     }
 
 }
