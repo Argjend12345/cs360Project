@@ -23,21 +23,6 @@ function forgotPassword() {
         <div className={Styles.contact}>
           <input type="text" placeholder='Username'/>
         </div>
-
-        Security Question 1: .................
-        <div className={Styles.contact}>
-          <input type="text" placeholder='Answer'/>
-        </div>
-
-        Security Question 2: ..................
-        <div className={Styles.contact}>
-          <input type="text" placeholder='Answer'/>
-        </div>
-
-        Security Question 3: ...................
-        <div className={Styles.contact}>
-          <input type="text" placeholder='Answer'/>
-        </div>
       </div>
 
       <div style={{textAlign: 'center'}}>   
