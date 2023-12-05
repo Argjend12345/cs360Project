@@ -71,6 +71,17 @@ function loginPage() {
     }
   };
 
+  const logIn = async () => {
+    try {
+        Router.push('admin/adminHome');
+        //Router.push('employee/employeeHome');
+        //Router.push('accountant/accountantHome');
+    }
+    catch (error) {
+    console.error(error);
+    }
+  }
+
   return (
     <React.Fragment>
       <Head>
@@ -98,7 +109,7 @@ function loginPage() {
       <div style={{paddingBottom: "15px"}}></div>
 
       <div style={{textAlign: 'center'}}>   
-        <button id="submitB" onClick={handleSubmit} className={`${Styles1.button} ${isLoading ? Styles1.loader : ''} ${isSuccess ? Styles1.success : ''} ${isError ? Styles1.error : ''}`}>
+        <button id="submitB" onClick={logIn} className={`${Styles1.button} ${isLoading ? Styles1.loader : ''} ${isSuccess ? Styles1.success : ''} ${isError ? Styles1.error : ''}`}>
           {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
         </button> 
       </div>
