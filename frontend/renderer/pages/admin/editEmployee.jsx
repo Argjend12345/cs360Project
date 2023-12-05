@@ -13,9 +13,6 @@ function editEmployee() {
   const cancel = () => {
       Router.push('/admin/adminHome');    
   }
-
-  const [isOpen, setIsOpen] = useState(false);
-
   //Storing employee data
   const [selectedRole, setSelectedRole] = useState(null);
   const [username, setUsername]   = useState('');
@@ -23,12 +20,13 @@ function editEmployee() {
   const [name, setName]   = useState('');
   const [hourlyPay, setHourlyPay]   = useState('');
 
-
   const roles = [
     'Employee',
     'Admin',
     'Accountant',
   ];
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -49,12 +47,12 @@ function editEmployee() {
   return (
     <React.Fragment>
       <Head>
-        <title>Add Employee</title>
+        <title>Edit Employee</title>
       </Head>
 
       <div style={{textAlign: "center"}}>
         <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
-        <h2>Add Employee Information</h2>
+        <h2>Edit Employee Information</h2>
       
         <div className={Styles2.dropdown}>
           <button className="dropdown-toggle" onClick={toggleDropdown}>
@@ -152,7 +150,5 @@ const handleEmployeePost = async (name, username, password, selectedRole, hourly
     // Handle error...
   }
 };
-
-
 
 export default editEmployee
