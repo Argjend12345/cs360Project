@@ -9,6 +9,11 @@ function removeEmployee() {
     const cancel = () => {
         Router.push('/admin/adminHome');    
     }
+
+    function removeEmployee()
+    {
+        removeEmployeeById(1);
+    }
     
   return (
         <React.Fragment>
@@ -25,7 +30,7 @@ function removeEmployee() {
             <input type="text" placeholder='UserId'/>
         </div>
 
-        <div style={{textAlign: "center"}}>
+        <div onClick={removeEmployee} style={{textAlign: "center"}}>
             <button className={`${Styles1.button}`}>
                 Submit
             </button>
@@ -37,5 +42,27 @@ function removeEmployee() {
         </React.Fragment>
   )
 }
+
+const removeEmployeeById = async (id) => {
+    try {
+      const response = await axios.put(
+        'http://localhost:8080/employee/' + id,
+        {
+          headers: {
+            Authorization: 'Bearer ' + ''
+            //ipcRenderer.sendSync('getToken')
+          }
+        }
+      );
+  
+      console.log(response.data);
+  
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+      // Handle error...
+    }
+  };
 
 export default removeEmployee
