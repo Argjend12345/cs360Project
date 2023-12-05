@@ -1,5 +1,7 @@
 package com.example.honeypotdevs.backend.database.employee;
 
+import com.example.honeypotdevs.backend.database.shift.Shift;
+import com.example.honeypotdevs.backend.database.shift.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
