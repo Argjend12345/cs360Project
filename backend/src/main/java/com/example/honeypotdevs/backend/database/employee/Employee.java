@@ -1,34 +1,43 @@
 package com.example.honeypotdevs.backend.database.employee;
 
+import com.example.honeypotdevs.backend.database.paystub.Paystub;
+import com.example.honeypotdevs.backend.database.shift.Shift;
 import com.example.honeypotdevs.backend.security.AES256Encryption;
 import com.example.honeypotdevs.backend.security.SHA256Hashing;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
+
 @Entity
+@Table(name="EMPLOYEE")
 public class Employee
 {
     @Id
+    @Column(name="employee_id")
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int employeeId;
-    private String name;
 
-    private String address;
+    @OneToMany(mappedBy="employee")
+    private Set<Shift> shifts;
+    @OneToMany(mappedBy="employee")
+    private Set<Paystub> paystubs;
+
+    private String name;
 
     private String username;
 
     private String password;
 
     private String role;
+    private String hourlyPay;
 
-    public Employee(String name, String address, String username, String password, String role)
+    public Employee(String name, String username, String password, String role, String hourlyPay)
     {
         this.name = name;
-        this.address = address;
         this.username = username;
         setPassword(password);
         this.role = role;
+        this.hourlyPay = hourlyPay;
     }
 
     public Employee() {
@@ -41,14 +50,6 @@ public class Employee
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getUsername() {
@@ -75,4 +76,29 @@ public class Employee
     public void setRole(String role) {
         this.role = role;
     }
+
+    public Set<Shift> getShifts() {
+        return shifts;
+    }
+
+    public void setShifts(Set<Shift> shifts) {
+        this.shifts = shifts;
+    }
+
+    public Set<Paystub> getPaystubs() {
+        return paystubs;
+    }
+
+    public void setPaystubs(Set<Paystub> paystubs) {
+        this.paystubs = paystubs;
+    }
+
+    public String getHourlyPay() {
+        return hourlyPay;
+    }
+
+    public void setHourlyPay(String hourlyPay) {
+        this.hourlyPay = hourlyPay;
+    }
+
 }

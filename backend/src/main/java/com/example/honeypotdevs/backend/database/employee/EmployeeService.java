@@ -1,5 +1,7 @@
 package com.example.honeypotdevs.backend.database.employee;
 
+import com.example.honeypotdevs.backend.database.shift.Shift;
+import com.example.honeypotdevs.backend.database.shift.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,13 @@ public class EmployeeService {
     public void addEmployee(Employee employee)
     {
         employeeRepository.save(employee);
+    }
+
+    public void editEmployee(Employee employee, int id)
+    {
+        Employee e = employeeRepository.findById(id).stream().findFirst().get();
+        e = employee;
+        employeeRepository.save(e);
     }
 
     public void removeEmployee(int id)
