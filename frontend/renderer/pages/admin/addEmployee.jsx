@@ -12,7 +12,7 @@ function addEmployee() {
   }
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedRole] = useState(null);
 
   const roles = [
     'Employee',
@@ -63,7 +63,15 @@ function addEmployee() {
         </div>
 
         <div className={Styles.contact}>
-          <input type="text" placeholder='Date of Birth'/>
+          <input type="text" placeholder='Username'/>
+        </div>
+
+        <div className={Styles.contact}>
+          <input type="text" placeholder='Password'/>
+        </div>
+
+        <div className={Styles.contact}>
+          <input type="text" placeholder='Hourly Pay'/>
         </div>
       </div>
 
