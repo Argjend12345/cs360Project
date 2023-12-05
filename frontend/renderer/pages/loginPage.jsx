@@ -73,9 +73,9 @@ function loginPage() {
 
   // REMOVE THIS FUNCTION
   const logIn = () => {
-      Router.push('admin/adminHome');
+      //Router.push('admin/adminHome');
       //Router.push('employee/employeeHome');
-      //Router.push('accountant/accountantHome');
+      Router.push('accountant/accountantHome');
   }
   // ----------------------------------------------------
 

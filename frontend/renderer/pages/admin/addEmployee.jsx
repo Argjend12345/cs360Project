@@ -21,7 +21,6 @@ function addEmployee() {
   const [password, setPassword]   = useState('');
   const [name, setName]   = useState('');
   const [hourlyPay, setHourlyPay]   = useState('');
-  const [hidden, setHidden] = useState(false);
 
   //Button states
   const [isLoading, setIsLoading] = useState(false);
@@ -59,6 +58,7 @@ function addEmployee() {
   ];
 
   // Hide / unhide styles
+  const [hidden, setHidden] = useState(false);
   const hideStyle = {
     display: hidden ? 'none' : ''
   };

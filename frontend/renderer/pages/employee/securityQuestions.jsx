@@ -39,7 +39,7 @@ function securityQuestions() {
 
       <div style={{textAlign: "center"}}>
         <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
-        <h2>Security Questions</h2>
+        <h2>Security Question</h2>
                 
         <div className={Styles2.dropdown}>
           <button className="dropdown-toggle" onClick={toggleDropdown}>
@@ -59,11 +59,6 @@ function securityQuestions() {
         <div className={Styles.contact}>
           <input type="text" placeholder='Answer'/>
         </div>
-
-        <div className={Styles.contact}>
-          <input type="text" placeholder='Answer'/>
-        </div>
-
       </div>
 
       <div style={{textAlign: 'center'}}>   
