@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import Head from 'next/head'
-import Link from 'next/link'
-import Image from 'next/image'
 import Styles from '../stylesheets/homepage.module.scss';
 import Styles1 from '../stylesheets/buttonComponent.module.scss';
 import axios from 'axios'

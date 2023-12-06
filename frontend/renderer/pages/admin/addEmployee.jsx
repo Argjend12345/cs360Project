@@ -11,11 +11,6 @@ const { ipcRenderer } = require('electron');
 
 function addEmployee() {
 
-  // Cancel button
-  const cancel = () => {
-      Router.push('/admin/adminHome');    
-  }
-  
   // Store employee data
   const [selectedRole, setSelectedRole] = useState(null);
   const [username, setUsername]         = useState('');
@@ -37,6 +32,19 @@ function addEmployee() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError]     = useState(false);
+
+  // Role functions
+  const selectRole = (role) => {
+    setSelectedRole(role);
+    setIsOpen(false);
+  };
+  const roles = ['Employee', 'Admin', 'Accountant',];
+  // Dropdown functions
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
   const submitHandler = async () => {
     try {
@@ -85,20 +93,6 @@ function addEmployee() {
       }
     };
 
-  // Role functions
-  const selectRole = (role) => {
-    setSelectedRole(role);
-    setIsOpen(false);
-  };
-  const roles = ['Employee', 'Admin', 'Accountant',];
-
-  // Dropdown functions
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
   const handleEmployeePost = async () => {
     try {
       const response = await axios.post(
@@ -112,15 +106,13 @@ function addEmployee() {
         },
         {
           headers: {
-            Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTgzNTY1NCwiZXhwIjoxNzAxODcxNjU0fQ.hX-C7SrkJa6-srOxS09AzjB1IVMRxmgJENXaQjdnGHw'
+            Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTg3NDc5MiwiZXhwIjoxNzAxOTEwNzkyfQ.GnXPwd_i4T0ex-QuB-Mh8v8awM6F5DmELmZuSnh7dec'
             //ipcRenderer.sendSync('getToken')
           }
         }
       );
       console.log(response.data);
-
       setEmployeeId(response.data);//DB returns employee Id on successful post. We'll use later for updating employee shifts.
-  
       return true;
     } catch (error) {
       console.log(error);
@@ -159,7 +151,6 @@ function addEmployee() {
       {
         handleClientShifts(7, employeeId);
       }
-
       return true;
   }
 
@@ -170,7 +161,7 @@ function addEmployee() {
       </Head>
 
       <div style={{textAlign: "Left"}}>
-        <button onClick={cancel} className={`${Styles1.button}`}>
+        <button onClick={(e) =>Router.push('/admin/adminHome')} className={`${Styles1.button}`}>
           Return
         </button>
       </div>
@@ -197,7 +188,6 @@ function addEmployee() {
             )}
           </div>
 
-
           <div className={Styles.contact}>
             <input type="text" id="name" placeholder='Name' onChange={(e) => setName(e.target.value)}/>
           </div>
@@ -205,7 +195,7 @@ function addEmployee() {
             <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)}/>
           </div>
           <div className={Styles.contact}>
-            <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
+            <input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
           </div>
           <div className={Styles.contact}>
             <input type="text" placeholder='Hourly Pay'onChange={(e) => setHourlyPay(e.target.value)}/>
@@ -216,8 +206,6 @@ function addEmployee() {
             </button>
           </div>
         </div>
-
-        
 
         <div id="content2" style={{display: 'none'}}>
           <h2>Select Employee Shifts</h2>
@@ -272,12 +260,7 @@ function addEmployee() {
             </div>
           </div>
         </div>
-
       </div>
-    
-
-      
-
 
       </React.Fragment>
   )
@@ -290,19 +273,18 @@ const handleClientShifts = async (shiftId, employeeId) =>
       'http://localhost:8080/employee/' +employeeId+ '/shifts/' +shiftId+ '/update',
       {
         id:"0",
-        shiftId: 1, 
+        shiftId: shiftId, 
         clockIn: '00:00:00',
         clockOut: '00:00:00',
         scheduled: true,
       },
       {
         headers: {
-          Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTgzNTY1NCwiZXhwIjoxNzAxODcxNjU0fQ.hX-C7SrkJa6-srOxS09AzjB1IVMRxmgJENXaQjdnGHw'
+          Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTg3NDc5MiwiZXhwIjoxNzAxOTEwNzkyfQ.GnXPwd_i4T0ex-QuB-Mh8v8awM6F5DmELmZuSnh7dec'
           //ipcRenderer.sendSync('getToken')
         }
       }
     );
-
     return true;
   } catch (error) {
     console.log(error);
