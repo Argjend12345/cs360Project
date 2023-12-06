@@ -12,12 +12,9 @@ function securityQuestions() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption1, setSelectedOption1] = useState(null);
-    const [selectedOption2, setSelectedOption2] = useState(null);
-    const [selectedOption3, setSelectedOption3] = useState(null);
-
 
     const questions = [
-        'In what city were your born?',
+        'In what city were you born?',
         'What is your favorite dish?',
         'Who is your favorite musician?',
     ];
