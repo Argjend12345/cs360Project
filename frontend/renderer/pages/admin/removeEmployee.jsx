@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Router  from 'next/router';
 import Styles from '../../stylesheets/homepage.module.scss';
 import Styles1 from '../../stylesheets/buttonComponent.module.scss';
+import Styles2 from '../../stylesheets/alert.module.scss';
 
 function removeEmployee() {
 
@@ -10,10 +11,21 @@ function removeEmployee() {
         Router.push('/admin/adminHome');    
     }
 
+    // Alert method
+    const [isVisible, setIsVisible] = useState(false);
+    const alert = () => {
+        setIsVisible(true);
+
+        setTimeout(() => {
+        setIsVisible(false);
+        }, 3000);
+    }
+
     function removeEmployee()
     {
         removeEmployeeById(1);
     }
+    
     
   return (
         <React.Fragment>
@@ -24,14 +36,21 @@ function removeEmployee() {
         <div style={{textAlign: "center"}}>
             <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
             <h2>Remove Employee</h2>
+
+            {isVisible && (
+              <div className={`${Styles2.alert}`}>
+                Employee was removed!
+              </div>
+            )}
         </div>
+        
 
         <div className={Styles.contact}>
             <input type="text" placeholder='UserId'/>
         </div>
 
         <div onClick={removeEmployee} style={{textAlign: "center"}}>
-            <button className={`${Styles1.button}`}>
+            <button onClick={alert} className={`${Styles1.button}`}>
                 Submit
             </button>
 

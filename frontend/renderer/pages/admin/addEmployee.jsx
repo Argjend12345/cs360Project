@@ -108,7 +108,7 @@ function addEmployee() {
         </div>
 
         <div className={Styles.contact}>
-          <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)} style={hideStyle}/>
+          <input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} style={hideStyle}/>
         </div>
 
         <div className={Styles.contact}>
@@ -127,11 +127,11 @@ function addEmployee() {
                 />
                 {day}
               </label>
-        </div>
-        ))}
-        <div>
-          <p style={showStyle}>Selected Days: {Object.keys(selectedDays).filter((day) => selectedDays[day]).join(', ')}</p>
-        </div>
+            </div>
+            ))}
+            <div>
+              <p style={showStyle}>Selected Days: {Object.keys(selectedDays).filter((day) => selectedDays[day]).join(', ')}</p>
+            </div>
         </div>
       </div>
 
