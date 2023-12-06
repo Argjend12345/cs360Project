@@ -1,9 +1,10 @@
 {
   "private": true,
-  "name": "my-nextron-app",
-  "description": "My application description",
+  "productName": "joeshardware",
+  "name": "joeshardware",
+  "description": "ClockIn-System",
   "version": "1.0.0",
-  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "author": "Argjend Krasniqi <argjend12345@gmail.com>",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
@@ -15,6 +16,21 @@
     "build:linux": "nextron build --linux",
     "postinstall": "electron-builder install-app-deps"
   },
+  "build": {
+    "win": {
+      "icon": "./resources/icon.ico"
+    },
+    "extraResources": [
+      {
+        "from": "./backend/",
+        "to": "backend",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  },
+  
   "dependencies": {
     "axios": "^1.6.2",
     "crypto-js": "^4.2.0",
