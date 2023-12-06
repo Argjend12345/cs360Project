@@ -6,18 +6,16 @@ import Router  from 'next/router';
 
 function accountantHome() {
 
+  // Routing
   const logOut = () => {
     Router.push('/loginPage');    
   }
-
   const generatePaystub = () => {
     Router.push('/accountant/generatePaystub');    
   }
-
   const retrievePaystub = () => {
     Router.push('/accountant/retrievePaystub');    
   }
-
   const payEmployee = () => {
     Router.push('/accountant/payEmployee');    
   }

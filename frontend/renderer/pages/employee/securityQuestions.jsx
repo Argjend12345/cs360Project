@@ -6,27 +6,30 @@ import Styles1 from '../../stylesheets/buttonComponent.module.scss';
 import Styles2 from '../../stylesheets/dropdown.module.scss';
 
 function securityQuestions() {
-    const cancel = () => {
-        Router.push('/employee/employeeHome');    
-    }
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption1, setSelectedOption1] = useState(null);
+  // Return button
+  const returnButton = () => {
+      Router.push('/employee/employeeHome');    
+  }
 
-    const questions = [
-        'In what city were you born?',
-        'What is your favorite dish?',
-        'Who is your favorite musician?',
-    ];
+  // Dropdown menu
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
+  const questions = [
+      'In what city were you born?',
+      'What is your favorite dish?',
+      'Who is your favorite musician?',
+  ];
 
-    const selectQuestion = (question) => {
-        setSelectedOption1(question);
-        setIsOpen(false);
-    };
+  const toggleDropdown = () => {
+      setIsOpen(!isOpen);
+  };
+
+  const selectQuestion = (question) => {
+      setSelectedQuestion(question);
+      setIsOpen(false);
+  };
 
   return (
     <React.Fragment>
@@ -34,13 +37,17 @@ function securityQuestions() {
         <title>Security Questions</title>
       </Head>
 
+      <button onClick={returnButton} className={`${Styles1.button}`} style={{left: "0"}}>
+        Return
+      </button>
+
       <div style={{textAlign: "center"}}>
         <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
         <h2>Security Question</h2>
                 
         <div className={Styles2.dropdown}>
           <button className="dropdown-toggle" onClick={toggleDropdown}>
-            {selectedOption1 || 'Select a question'}
+            {selectedQuestion || 'Select a question'}
           </button>
           {isOpen && (
             <ul className={Styles2.dropdownMenu}>
@@ -60,15 +67,11 @@ function securityQuestions() {
 
       <div style={{textAlign: 'center'}}>   
         <button className={`${Styles1.button}`}>
-            Submit
-        </button>
-
-        <button onClick={cancel} className={`${Styles1.button}`}>
-            Cancel
+          Submit
         </button>
       </div>
     </React.Fragment>  
-    )
+  )
 }
 
 export default securityQuestions
