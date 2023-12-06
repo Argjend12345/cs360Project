@@ -71,7 +71,6 @@ function editEmployee() {
   {
     setHidden(true)
     getEmployeeById(1);
-    //handleEmployeePost(name, username, password, selectedRole, hourlyPay);
   }
 
 
@@ -113,7 +112,7 @@ function editEmployee() {
         </div>
 
         <div className={Styles.contact}>
-          <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)} style={showStyle}/>
+          <input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} style={showStyle}/>
         </div>
 
         <div className={Styles.contact}>

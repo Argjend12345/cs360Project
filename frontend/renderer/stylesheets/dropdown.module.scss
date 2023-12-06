@@ -2,6 +2,7 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    margin-bottom: 20px;
   }
   
   /* Dropdown button */
@@ -26,7 +27,7 @@
   }
   
   .dropdownMenu li {
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     border-bottom: 1px solid #ddd;
   }

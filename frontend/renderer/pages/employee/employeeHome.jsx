@@ -62,13 +62,13 @@ function employeeHome() {
         </button>
 
         <button onClick={(viewPaystub)} className={`${Styles1.button}`} style={{padding: "40px", marginLeft: "20px"}}>
-          View Paystub
+          View Paystubs
         </button>
       </div>
       
       <div style={{textAlign: "center"}}>
         <button onClick={(securityQuestions)} className={`${Styles1.button}`} style={{padding: "40px", marginTop: "10px"}}>
-          Change Security Questions
+          Change Security Question
         </button>
       </div>
 
