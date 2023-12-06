@@ -29,9 +29,10 @@ public class Employee
     private String password;
 
     private String role;
-    private String hourlyPay;
 
-    public Employee(String name, String username, String password, String role, String hourlyPay)
+    private double hourlyPay;
+
+    public Employee(String name, String username, String password, String role, double hourlyPay)
     {
         this.name = name;
         this.username = username;
@@ -93,11 +94,11 @@ public class Employee
         this.paystubs = paystubs;
     }
 
-    public String getHourlyPay() {
+    public double getHourlyPay() {
         return hourlyPay;
     }
 
-    public void setHourlyPay(String hourlyPay) {
+    public void setHourlyPay(double hourlyPay) {
         this.hourlyPay = hourlyPay;
     }
 

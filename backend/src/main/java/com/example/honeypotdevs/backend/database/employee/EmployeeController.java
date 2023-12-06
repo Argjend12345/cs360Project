@@ -8,8 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class EmployeeController
@@ -60,9 +65,35 @@ public class EmployeeController
     //employee/{id}/paystubs/create
 
     @RequestMapping(method = RequestMethod.POST, value = "/employee/{id}/paystubs/create")
-    public void createEmployeePaystub(@RequestBody Paystub p, @PathVariable int id)
+    public void createEmployeePaystub(@PathVariable int id)
     {
         Optional<Employee> e = employeeService.getEmployeeById(id);//Getting the employee by passed id
+
+        Set<Shift> employeeShifts = e.get().getShifts();//Getting all the employee shifts
+
+        //Calculating the employee's total hours and minutes.
+        AtomicLong hoursDiff = new AtomicLong();
+        AtomicLong minutesDiff = new AtomicLong();
+
+        employeeShifts.forEach(shift -> {
+            hoursDiff.addAndGet(shift.getClockIn().until(shift.getClockOut(), ChronoUnit.HOURS));
+            minutesDiff.addAndGet(shift.getClockIn().until(shift.getClockOut(), ChronoUnit.MINUTES) % 60);
+        });
+
+        //Get day & to string
+        double totalMinutes = (hoursDiff.get() * 60) + minutesDiff.get();
+        double payRate = e.get().getHourlyPay();
+        double grossPay = (totalMinutes/60) * payRate;
+        double hoursWorked = hoursDiff.get();
+        double netPay = grossPay * 0.80;
+        boolean paid = false;
+
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String date = currentDate.format(formatter);
+
+        Paystub p = new Paystub(e.get(), date, hoursWorked,grossPay, netPay, paid);
+
         e.ifPresent(p::setEmployee);
         paystubService.addPaystub(p);
     }

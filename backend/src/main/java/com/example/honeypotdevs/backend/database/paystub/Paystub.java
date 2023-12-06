@@ -26,8 +26,9 @@ public class Paystub
     public Paystub() {
     }
 
-    public Paystub(String payday, double hoursWorked, double grossPay, double netPay, boolean paid)
+    public Paystub(Employee e, String payday, double hoursWorked, double grossPay, double netPay, boolean paid)
     {
+        this.employee = e;
         this.payday = payday;
         this.hoursWorked = hoursWorked;
         this.grossPay = grossPay;
