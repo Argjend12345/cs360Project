@@ -14,17 +14,18 @@ public class Shift
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private int id;
 
+    private int shiftId;
     private LocalTime clockIn;
 
     private LocalTime clockOut;
 
     private boolean isScheduled;
 
-
-    public Shift(Employee e)
+    public Shift(Employee e, int shiftId)
     {
+        this.shiftId = shiftId;
         this.employee = e;
         this.clockIn = LocalTime.of(0, 0);
         this.clockOut = LocalTime.of(0, 0);
@@ -34,6 +35,15 @@ public class Shift
     public Shift() {
 
     }
+
+    public int getShiftId() {
+        return shiftId;
+    }
+
+    public void setShiftId(int shiftId) {
+        this.shiftId = shiftId;
+    }
+
 
     public LocalTime getClockIn() {
         return clockIn;
@@ -58,16 +68,17 @@ public class Shift
     public void setScheduled(boolean scheduled) {
         isScheduled = scheduled;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
     public void setEmployee(Employee employee)
     {
         this.employee = employee;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

@@ -44,10 +44,10 @@ public class EmployeeController
 
         for(int i = 1; i < 8; i++)
         {
-            shiftService.addShift(new Shift(employee));
+            shiftService.addShift(new Shift(employee, i));
         }
 
-        return 5;
+        return employee.getEmployeeId();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/employee/{id}")
@@ -104,18 +104,22 @@ public class EmployeeController
         return paystubService.getEmployeePaystubs(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/employee/{id}/shifts/update")
-    public void updateEmployeeShift(@RequestBody Shift s, @PathVariable int id)
+    @RequestMapping(method = RequestMethod.POST, value = "/employee/{id}/shifts/{shiftId}/update")
+    public void editEmployeeShift(@RequestBody Shift s, @PathVariable int id, @PathVariable int shiftId)
     {
-        //Get employee object using the employee Id.
-        Optional<Employee> e = employeeService.getEmployeeById(id);//Getting the employee by passed id
-        e.ifPresent(s::setEmployee);
-        shiftService.addShift(s);
+        shiftService.editShift(id, shiftId, s);
     }
     @RequestMapping(method = RequestMethod.GET, value ="/employee/{id}/shifts")
     public List<Shift> getAllEmployeeShifts(@PathVariable int id)
     {
         return shiftService.getEmployeeShifts(id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value="/employee/{id}")
+    public void removeEmployee(@PathVariable int id)
+    {
+        shiftService.deleteEmployeeShifts(id); // Should delete all the elements that tie shifts to employee
+        employeeService.removeEmployee(id);
     }
 
 }
