@@ -57,6 +57,15 @@ function addEmployee() {
     'Accountant',
   ];
 
+  // Hide / unhide styles
+  const [hidden, setHidden] = useState(false);
+  const hideStyle = {
+    display: hidden ? 'none' : ''
+  };
+  const showStyle = {
+    display: hidden ? '' : 'none'
+  }
+
   // Dropdown functions
   const [isOpen, setIsOpen] = useState(false);
 
@@ -103,24 +112,21 @@ function addEmployee() {
 
         <div id="content1">
           <div className={Styles.contact}>
-            <input type="text" id="name" placeholder='Name' onChange={(e) => setName(e.target.value)}/>
+            <input type="text" id="name" placeholder='Name' onChange={(e) => setName(e.target.value)} style={hideStyle}/>
           </div>
           <div className={Styles.contact}>
-            <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)}/>
+            <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)} style={hideStyle}/>
           </div>
           <div className={Styles.contact}>
-            <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
+            <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)} style={hideStyle}/>
           </div>
           <div className={Styles.contact}>
-            <input type="text" placeholder='Hourly Pay'onChange={(e) => setHourlyPay(e.target.value)}/>
+            <input type="text" placeholder='Hourly Pay'onChange={(e) => setHourlyPay(e.target.value)} style={hideStyle}/>
           </div>
           <div style={{textAlign: 'center'}}>   
             <button id="submitB" onClick={createClient} className={`${Styles1.button} ${isLoading ? Styles1.loader : ''} ${isSuccess ? Styles1.success : ''} ${isError ? Styles1.error : ''}`} style={{height: "50px", width: "100px"}}>
                 {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
             </button> 
-            <button onClick={cancel} className={`${Styles1.button}`}>
-                Cancel
-            </button>
           </div>
         </div>
 
