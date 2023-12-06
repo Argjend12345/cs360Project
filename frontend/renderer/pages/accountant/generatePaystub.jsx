@@ -8,7 +8,7 @@ import Styles2 from '../../stylesheets/alert.module.scss'
 function generatePaystub() {
 
     // Cancel button
-    const cancel = () => {
+    const returnButton = () => {
         Router.push('/accountant/accountantHome');    
     }
 
@@ -28,6 +28,10 @@ function generatePaystub() {
     <title>Generate Paystub</title>
     </Head>
 
+    <button onClick={returnButton} className={`${Styles1.button}`} style={{left: "0"}}>
+      Return
+    </button>
+
     <div style={{textAlign: "center"}}>
         <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
         <h2>Generate Paystub</h2>
@@ -46,10 +50,6 @@ function generatePaystub() {
     <div style={{textAlign: "center"}}>
         <button onClick={(alertUser)} className={`${Styles1.button}`}>
             Submit
-        </button>
-
-        <button onClick={cancel} className={`${Styles1.button}`}>
-            Cancel
         </button>
     </div>
     </React.Fragment>
