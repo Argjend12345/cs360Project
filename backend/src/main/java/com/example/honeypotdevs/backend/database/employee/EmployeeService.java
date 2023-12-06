@@ -40,7 +40,14 @@ public class EmployeeService {
     public void editEmployee(Employee employee, int id)
     {
         Employee e = employeeRepository.findById(id).stream().findFirst().get();
-        e = employee;
+
+        e.setName(employee.getName());
+        e.setRole(employee.getRole());
+        e.setShifts(employee.getShifts());
+        e.setHourlyPay(employee.getHourlyPay());
+        e.setUsername(employee.getUsername());
+        e.setPassword(employee.getPassword());
+
         employeeRepository.save(e);
     }
 
