@@ -23,19 +23,10 @@ function employeeHome() {
   const [isError, setIsError]     = useState(false);
   const handleClock = () => {
     setTimeout(() => {
-      setIsLoading(true);
-      setIsSuccess(false);
-
-      setTimeout(() => {
-        setIsLoading(false);
         setIsSuccess(true);
-
         setTimeout(() => {
           setIsSuccess(false);
-        }, 2000)
-
-      }, 1000);
-
+      }, 2000);
     }, 0);
   }
 

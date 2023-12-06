@@ -4,6 +4,7 @@ import Router  from 'next/router';
 import Styles from '../../stylesheets/homepage.module.scss';
 import Styles1 from '../../stylesheets/buttonComponent.module.scss';
 import Styles2 from '../../stylesheets/table.module.scss';
+import ButtonStyle from '../../stylesheets/loadButton.module.scss';
 
 function retrievePaystub() {
 
@@ -20,17 +21,34 @@ function retrievePaystub() {
   const showStyle = {
       display: hidden ? '' : 'none'
   }
-  function getInput() {
-    setHidden(true)
+
+  //Button loading
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError]     = useState(false);
+
+  const handleSubmit = () => {
+    setTimeout(() => {
+      setIsLoading(true);
+      setIsSuccess(false);
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+          setHidden(true)
+        }, 2000)
+      }, 3000);
+    }, 0);
   }
 
   // Store employee's information
   const [employees, setEmployees] = useState([
-    { id: 1, payWeek: '12/3/23 - 12/10/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 50, grossPay: 1000, percentDeduction: 10, netPay: 900},
-    { id: 2, payWeek: '11/26/23 - 12/3/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 40, grossPay: 800, percentDeduction: 10, netPay: 720},
-    { id: 3, payWeek: '11/19/23 - 11/26/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 40.50, grossPay: 810, percentDeduction: 10, netPay: 729},
-    { id: 4, payWeek: '11/12/23 - 11/19/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 38.25, grossPay: 765, percentDeduction: 10, netPay: '688.50'},
-    { id: 5, payWeek: '11/5/23 - 11/12/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 39, grossPay: 780, percentDeduction: 10, netPay: 702},
+    { id: 1, payWeek: '12/3/23 - 12/10/23', name: 'Candance Hill', hourlyPay: 15, hoursWorked: 40, grossPay: 600, percentDeduction: 10, netPay: 540},
+    { id: 2, payWeek: '11/26/23 - 12/3/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 38, grossPay: 570, percentDeduction: 10, netPay: 513},
+    { id: 3, payWeek: '11/19/23 - 11/26/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 40, grossPay: 600, percentDeduction: 10, netPay: 540},
+    { id: 4, payWeek: '11/12/23 - 11/19/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 39, grossPay: 585, percentDeduction: 10, netPay: '526.50'},
+    { id: 5, payWeek: '11/5/23 - 11/12/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 41, grossPay: 615, percentDeduction: 10, netPay: '553.50'},
   ]);
 
   return (
@@ -78,8 +96,8 @@ function retrievePaystub() {
           </tbody>
       </table>
 
-      <button onClick={getInput} className={`${Styles1.button}`} style={hideStyle}>
-        Submit
+      <button id="submitB" onClick={handleSubmit} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`} style={hideStyle}>
+        {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
       </button>
     </div>
     </React.Fragment>
