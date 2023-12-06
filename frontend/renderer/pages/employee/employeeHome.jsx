@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import Styles1 from '../../stylesheets/buttonComponent.module.scss';
-import Styles2 from '../../stylesheets/alert.module.scss';
 import Router  from 'next/router';
-import '../../stylesheets/alert.module.scss';
-import securityQuestions from './securityQuestions';
-
+import ButtonStyle from '../../stylesheets/loadButton.module.scss';
 
 function employeeHome() {
 
+  // Routing
   const logOut = () => {
     Router.push('/loginPage');    
   }
-
   const viewPaystub = () => {
     Router.push('/employee/viewPaystubs');    
   }
-
   const securityQuestions = () => {
     Router.push('/employee/securityQuestions');    
   }
 
-  const [isVisible, setIsVisible] = useState(false);
-
-  const alertUser = () => {
-    setIsVisible(true);
-
+  //Button loading
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError]     = useState(false);
+  const handleClock = () => {
     setTimeout(() => {
-      setIsVisible(false);
-    }, 3000);
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+      }, 2000);
+    }, 0);
   }
 
   return (
@@ -37,12 +35,6 @@ function employeeHome() {
       <Head>
         <title>Employee View</title>
       </Head>
-
-      {isVisible && (
-        <div className={`${Styles2.alert}`}>
-          You are clocked in /out!
-        </div>
-      )}
 
       <div style={{textAlign: "right"}}>
         <button onClick={logOut} className={`${Styles1.button}`}>
@@ -57,9 +49,9 @@ function employeeHome() {
       <div style={{textAlign: "center"}}>
         <h1>Hello Employee!</h1>
 
-        <button onClick={(alertUser)}className={`${Styles1.button}`} style={{padding: "40px"}}>
-          Clock In / Clock Out
-        </button>
+        <button id="submitB" onClick={handleClock} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`} style={{height: "100px", width: "200px"}}>
+        {isSuccess ? 'Success' : isError ? 'Error' : 'Clock In / Clock Out'}
+      </button>
 
         <button onClick={(viewPaystub)} className={`${Styles1.button}`} style={{padding: "40px", marginLeft: "20px"}}>
           View Paystubs

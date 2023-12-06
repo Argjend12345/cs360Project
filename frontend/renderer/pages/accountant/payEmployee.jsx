@@ -3,54 +3,57 @@ import Head from 'next/head';
 import Router  from 'next/router';
 import Styles from '../../stylesheets/homepage.module.scss';
 import Styles1 from '../../stylesheets/buttonComponent.module.scss';
-import Styles2 from '../../stylesheets/alert.module.scss'
+import ButtonStyle from '../../stylesheets/loadButton.module.scss';
 
 function payEmployee() {
 
-    // Cancel button
-    const cancel = () => {
-        Router.push('/accountant/accountantHome');    
-    }
+  // Return button
+  const returnButton = () => {
+      Router.push('/accountant/accountantHome');    
+  }
 
-    // Alert method
-    const [isVisible, setIsVisible] = useState(false);
-    const alertUser = () => {
-        setIsVisible(true);
+  //Button loading
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError]     = useState(false);
 
+  const handleSubmit = () => {
+    setTimeout(() => {
+      setIsLoading(true);
+      setIsSuccess(false);
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsSuccess(true);
         setTimeout(() => {
-        setIsVisible(false);
-        }, 3000);
-    }
+          setIsSuccess(false);
+        }, 2000)
+      }, 3000);
+    }, 0);
+  }
 
   return (
     <React.Fragment>
     <Head>
-    <title>Pay Employee</title>
+      <title>Pay Employee</title>
     </Head>
 
-    <div style={{textAlign: "center"}}>
-        <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
-        <h2>Pay Employee</h2>
+    <button onClick={returnButton} className={`${Styles1.button}`} style={{left: "0"}}>
+      Return
+    </button>
 
-        {isVisible && (
-          <div className={`${Styles2.alert}`}>
-            Employee was paid!
-          </div>
-        )}
+    <div style={{textAlign: "center"}}>
+      <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
+      <h2>Pay Employee</h2>
     </div>
 
     <div className={Styles.contact}>
-        <input type="text" placeholder='UserId'/>
+      <input type="text" placeholder='UserId'/>
     </div>
 
     <div style={{textAlign: "center"}}>
-        <button onClick={(alertUser)} className={`${Styles1.button}`}>
-            Submit
-        </button>
-
-        <button onClick={cancel} className={`${Styles1.button}`}>
-            Cancel
-        </button>
+      <button id="submitB" onClick={handleSubmit} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`}>
+        {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
+      </button>
     </div>
     </React.Fragment>
   )
