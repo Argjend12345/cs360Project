@@ -1,11 +1,10 @@
 import { app, ipcMain } from 'electron';
 import serve from 'electron-serve';
 import { createWindow } from './helpers';
-
+const path = require('path');
+const url = require('url');
+const { exec } = require('child_process');
 const isProd = process.env.NODE_ENV === 'production';
-
-//Make listener for API calls
-
 
 if (isProd) {
   serve({ directory: 'app' });
@@ -24,8 +23,19 @@ if (isProd) {
     resizable: false,
   });
 
+  const appDirectory = path.join(app.getAppPath(), '..');
+  console.log(appDirectory);
+  const filePath = path.join(appDirectory, '/backend/backend-0.0.1-SNAPSHOT.jar');
+  
   if (isProd) {
-    await mainWindow.loadURL('app://./home.html');
+    await mainWindow.loadURL('app://./loginPage.html')
+    exec(`start ${filePath}`, (err, stdout, stderr) => {
+      if (err) {
+        console.error('Error opening file:', err);
+        return;
+      }
+      console.log('File opened successfully:', stdout);
+    });
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/loginPage`);
