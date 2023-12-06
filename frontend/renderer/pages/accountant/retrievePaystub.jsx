@@ -7,39 +7,22 @@ import Styles2 from '../../stylesheets/table.module.scss';
 
 function retrievePaystub() {
 
-    // Return button
-    const returnButton = () => {
-        Router.push('/accountant/accountantHome');    
-    }
-
-    // Hide / unhide styles
-    const [hidden, setHidden] = useState(false);
-    const hideStyle = {
-        display: hidden ? 'none' : ''
-    };
-    const showStyle = {
-        display: hidden ? '' : 'none'
-    }
-
-    function getInput()
-  {
-    setHidden(true)
+  // Return button
+  const returnButton = () => {
+      Router.push('/accountant/accountantHome');    
   }
 
-  // Day functions
-  const day = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-  ];
-  const selectRole = (role) => {
-    setSelectedRole(role);
-    setIsOpen(false);
+  // Hide / unhide styles
+  const [hidden, setHidden] = useState(false);
+  const hideStyle = {
+      display: hidden ? 'none' : ''
   };
+  const showStyle = {
+      display: hidden ? '' : 'none'
+  }
+  function getInput() {
+    setHidden(true)
+  }
 
   // Store employee's information
   const [employees, setEmployees] = useState([
@@ -53,7 +36,7 @@ function retrievePaystub() {
   return (
     <React.Fragment>
     <Head>
-    <title>Retrieve Paystubs</title>
+      <title>Retrieve Paystubs</title>
     </Head>
 
     <button onClick={returnButton} className={`${Styles1.button}`} style={{left: "0"}}>
@@ -71,32 +54,32 @@ function retrievePaystub() {
       <table className={`${Styles2.table}`} style={showStyle}>
           <thead>
           <tr>
-              <th className={`${Styles2.th}`}>Pay Week</th>
-              <th className={`${Styles2.th}`}>Name</th>
-              <th className={`${Styles2.th}`}>Hourly Pay</th>
-              <th className={`${Styles2.th}`}>Hours Worked</th>
-              <th className={`${Styles2.th}`}>Gross Pay</th>
-              <th className={`${Styles2.th}`}>Percent Deduction</th>
-              <th className={`${Styles2.th}`}>Net Pay</th>
+            <th className={`${Styles2.th}`}>Pay Week</th>
+            <th className={`${Styles2.th}`}>Name</th>
+            <th className={`${Styles2.th}`}>Hourly Pay</th>
+            <th className={`${Styles2.th}`}>Hours Worked</th>
+            <th className={`${Styles2.th}`}>Gross Pay</th>
+            <th className={`${Styles2.th}`}>Percent Deduction</th>
+            <th className={`${Styles2.th}`}>Net Pay</th>
           </tr>
           </thead>
           <tbody>
           {employees.map((employee) => (
-              <tr key={employee.id}>
-              <td className={`${Styles2.td}`}>{employee.payWeek}</td>
-              <td className={`${Styles2.td}`}>{employee.name}</td>
-              <td className={`${Styles2.td}`}>{employee.hourlyPay}</td>
-              <td className={`${Styles2.td}`}>{employee.hoursWorked}</td>
-              <td className={`${Styles2.td}`}>${employee.grossPay}</td>
-              <td className={`${Styles2.td}`}>{employee.percentDeduction}%</td>
-              <td className={`${Styles2.td}`}>${employee.netPay}</td>
-              </tr>
+            <tr key={employee.id}>
+            <td className={`${Styles2.td}`}>{employee.payWeek}</td>
+            <td className={`${Styles2.td}`}>{employee.name}</td>
+            <td className={`${Styles2.td}`}>{employee.hourlyPay}</td>
+            <td className={`${Styles2.td}`}>{employee.hoursWorked}</td>
+            <td className={`${Styles2.td}`}>${employee.grossPay}</td>
+            <td className={`${Styles2.td}`}>{employee.percentDeduction}%</td>
+            <td className={`${Styles2.td}`}>${employee.netPay}</td>
+            </tr>
           ))}
           </tbody>
       </table>
 
       <button onClick={getInput} className={`${Styles1.button}`} style={hideStyle}>
-          Submit
+        Submit
       </button>
     </div>
     </React.Fragment>
