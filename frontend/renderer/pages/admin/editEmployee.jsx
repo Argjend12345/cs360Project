@@ -137,6 +137,7 @@ function editEmployee() {
         setHourlyPay(response.data.hourlyPay);
         setShifts(response.data.shifts);
 
+
         return response.data;
       } catch (error) {
         console.error(error);
@@ -205,12 +206,13 @@ function editEmployee() {
           <div className={Styles.contact}>
               <input type="text" placeholder='UserId' onChange={(e) => setEmployeeId(e.target.value)}/>
           </div>
-
+          
           <div style={{textAlign: "center"}}>
           <button id="submitB" onClick={submitHandler} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`}>
               {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
             </button>
           </div>
+
         </div>
 
         <div style={{textAlign: "center"}}>

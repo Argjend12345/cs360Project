@@ -1,8 +1,10 @@
 import React, { useState }  from 'react'
+
 import Head from 'next/head';
 import Router  from 'next/router';
 import Styles from '../../stylesheets/homepage.module.scss';
 import Styles1 from '../../stylesheets/buttonComponent.module.scss';
+
 import ButtonStyle from '../../stylesheets/loadButton.module.scss';
 import axios from 'axios'
 
@@ -73,7 +75,7 @@ function removeEmployee() {
           // Handle error...
         }
       };
-
+  
   return (
         <React.Fragment>
         <Head>
@@ -89,11 +91,19 @@ function removeEmployee() {
         <div style={{textAlign: "center"}}>
             <img style={{padding:"0px 0px 0px 0px", height: "200px", width:"350px"}}src="/images/logo.png"/>
             <h2>Remove Employee</h2>
+
+            {isVisible && (
+              <div className={`${Styles2.alert}`}>
+                Employee was removed!
+              </div>
+            )}
         </div>
+        
 
         <div className={Styles.contact}>
             <input type="text" placeholder='UserId' onChange={(e) => setEmployeeId(e.target.value)}/>
         </div>
+
 
         <div style={{textAlign: "center"}}>
            <button id="submitB" onClick={submitHandler} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`}>
