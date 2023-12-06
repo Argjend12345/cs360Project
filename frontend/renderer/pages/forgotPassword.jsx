@@ -4,6 +4,7 @@ import Router  from 'next/router';
 import Styles from '../stylesheets/homepage.module.scss';
 import Styles1 from '../stylesheets/buttonComponent.module.scss';
 import Styles2 from '../stylesheets/dropdown.module.scss';
+import ButtonStyle from '../stylesheets/loadButton.module.scss';
 
 function forgotPassword() {
 
@@ -16,9 +17,11 @@ function forgotPassword() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption1, setSelectedOption1] = useState(null);
   const questions = [
-      'In what city were you born?',
-      'What is your favorite dish?',
-      'Who is your favorite musician?',
+    'What is your favorite dish?',
+    'In what city were you born?',
+    'Who is your favorite musician?',
+    "What is your mother's maiden name?",
+    "What is the name of your favorite teacher?",
   ];
   const toggleDropdown = () => {
       setIsOpen(!isOpen);
@@ -36,8 +39,41 @@ function forgotPassword() {
   const showStyle = {
       display: hidden ? '' : 'none'
   }
+  
+  //Button loading
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError]     = useState(false);
+
   const handleSubmit = () => {
-    setHidden(true)
+    setTimeout(() => {
+      setIsLoading(true);
+      setIsSuccess(false);
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+          setHidden(true)
+        }, 2000)
+      }, 3000);
+    }, 0);
+  }
+
+  const changePage = () => {
+    setTimeout(() => {
+      setIsLoading(true);
+      setIsSuccess(false);
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+          setHidden(true)
+          Router.push('/changePassword');    
+        }, 2000)
+      }, 3000);
+    }, 0);
   }
 
   return (
@@ -77,8 +113,12 @@ function forgotPassword() {
         <input type="text" placeholder='Answer'/>
       </div>
 
-      <button onClick={handleSubmit} className={`${Styles1.button}`}>
-        Submit
+      <button id="submitB" onClick={handleSubmit} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`} style={hideStyle}>
+        {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
+      </button>
+
+      <button id="submitB" onClick={changePage} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`} style={showStyle}>
+        {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
       </button>
     </div>
     </React.Fragment>  

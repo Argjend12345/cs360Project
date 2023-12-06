@@ -20,14 +20,15 @@ function viewClock() {
 
   // Employees
   const [employees, setEmployees] = useState([
-    { id: 1, name: 'Joe Smith', clockIn: '7:00', clockOut: '5:00', hoursWorked: '10'},
-    { id: 2, name: 'Bruce Watson', clockIn: '7:00', clockOut: '12:00', hoursWorked: '5'},
-    { id: 3, name: 'Candace Hill', clockIn: '9:00', clockOut: '5:00', hoursWorked: '8'},
+    { id: 1, name: 'Bruce Watson', clockIn: '7:00', clockOut: '5:00', hoursWorked: '10'},
+    { id: 2, name: 'Candace Hill', clockIn: '7:00', clockOut: '2:00', hoursWorked: '8'},
+    { id: 3, name: 'Peter Yan', clockIn: '9:00', clockOut: '5:00', hoursWorked: '8'},
     { id: 4, name: 'Jane Doe', clockIn: '9:00', clockOut: '5:00', hoursWorked: '8'},
-    { id: 5, name: 'Steve Smith', clockIn: '9:00', clockOut: '2:00', hoursWorked: '5'},
-    { id: 6, name: 'Ryan Ortega', clockIn: '1:00', clockOut: '9:15', hoursWorked: '8.25'},
-    { id: 7, name: 'Tim Dunlap', clockIn: '4:00', clockOut: '9:15', hoursWorked: '5.25'},
-    { id: 8, name: 'Marco Gonzalez', clockIn: '4:00', clockOut: '9:15', hoursWorked: '5.25'},
+    { id: 5, name: 'Steve Smith', clockIn: '9:00', clockOut: '1:00', hoursWorked: '4'},
+    { id: 6, name: 'Ryan Ortega', clockIn: '1:00', clockOut: '9:00', hoursWorked: '8'},
+    { id: 7, name: 'Tim Dunlap', clockIn: '5:00', clockOut: '9:00', hoursWorked: '4'},
+    { id: 8, name: 'Marco Gonzalez', clockIn: '5:00', clockOut: '9:00', hoursWorked: '4'},
+    { id: 9, name: 'Kenny Salcedo', clockIn: '5:00', clockOut: '9:00', hoursWorked: '4'},
   ]);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -35,13 +36,11 @@ function viewClock() {
 
   // Dropdown menu
   const days = [
-      'Sunday',
       'Monday',
       'Tuesday',
       'Wednesday',
       'Thursday',
       'Friday',
-      'Saturday',
   ];
   const toggleDropdown = () => {
       setIsOpen(!isOpen);
@@ -101,6 +100,7 @@ function viewClock() {
               </tr>
           ))}
           </tbody>
+
       </table>
       </React.Fragment>
   )

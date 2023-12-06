@@ -11,13 +11,13 @@ function viewPaystub() {
       Router.push('/employee/employeeHome');    
   }
 
-  // Store employee's information
+  // Employee's information
   const [employees, setEmployees] = useState([
-    { id: 1, payWeek: '12/3/23 - 12/10/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 50, grossPay: 1000, percentDeduction: 10, netPay: 900},
-    { id: 2, payWeek: '11/26/23 - 12/3/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 40, grossPay: 800, percentDeduction: 10, netPay: 720},
-    { id: 3, payWeek: '11/19/23 - 11/26/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 40.50, grossPay: 810, percentDeduction: 10, netPay: 729},
-    { id: 4, payWeek: '11/12/23 - 11/19/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 38.25, grossPay: 765, percentDeduction: 10, netPay: '688.50'},
-    { id: 5, payWeek: '11/5/23 - 11/12/23', name: 'Joe Smith', hourlyPay: 20, hoursWorked: 39, grossPay: 780, percentDeduction: 10, netPay: 702},
+    { id: 2, payWeek: '12/3/23 - 12/10/23', name: 'Bruce Watson', hourlyPay: 20, hoursWorked: 50, grossPay: 1000, percentDeduction: 10, netPay: 900},
+    { id: 1, payWeek: '11/26/23 - 12/3/23', name: 'Bruce Watson', hourlyPay: 20, hoursWorked: 40, grossPay: 800, percentDeduction: 10, netPay: 720},
+    { id: 3, payWeek: '11/19/23 - 11/26/23', name: 'Bruce Watson', hourlyPay: 20, hoursWorked: 40.50, grossPay: 810, percentDeduction: 10, netPay: 729},
+    { id: 4, payWeek: '11/12/23 - 11/19/23', name: 'Bruce Watson', hourlyPay: 20, hoursWorked: 38.25, grossPay: 765, percentDeduction: 10, netPay: '688.50'},
+    { id: 5, payWeek: '11/5/23 - 11/12/23', name: 'Bruce Watson', hourlyPay: 20, hoursWorked: 39, grossPay: 780, percentDeduction: 10, netPay: 702},
   ]);
     
   return (

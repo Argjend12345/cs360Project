@@ -4,6 +4,7 @@ import Router  from 'next/router';
 import Styles from '../../stylesheets/homepage.module.scss';
 import Styles1 from '../../stylesheets/buttonComponent.module.scss';
 import Styles2 from '../../stylesheets/dropdown.module.scss';
+import ButtonStyle from '../../stylesheets/loadButton.module.scss';
 
 function securityQuestions() {
 
@@ -17,9 +18,11 @@ function securityQuestions() {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
 
   const questions = [
-      'In what city were you born?',
-      'What is your favorite dish?',
-      'Who is your favorite musician?',
+    'What is your favorite dish?',
+    'In what city were you born?',
+    'Who is your favorite musician?',
+    "What is your mother's maiden name?",
+    "What is the name of your favorite teacher?",
   ];
 
   const toggleDropdown = () => {
@@ -30,6 +33,21 @@ function securityQuestions() {
       setSelectedQuestion(question);
       setIsOpen(false);
   };
+
+  //Button loading
+  //Button loading
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError]     = useState(false);
+  const handleSubmit = () => {
+    setTimeout(() => {
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+          Router.push('/employee/employeeHome');    
+      }, 1700);
+    }, 0);
+  }
 
   return (
     <React.Fragment>
@@ -61,13 +79,11 @@ function securityQuestions() {
         </div>
 
         <div className={Styles.contact}>
-          <input type="text" placeholder='Answer'/>
+          <input type="text" name="Send" placeholder='Answer'/>
         </div>
-      </div>
 
-      <div style={{textAlign: 'center'}}>   
-        <button className={`${Styles1.button}`}>
-          Submit
+        <button id="submitB" onClick={handleSubmit} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`}>
+          {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
         </button>
       </div>
     </React.Fragment>  
