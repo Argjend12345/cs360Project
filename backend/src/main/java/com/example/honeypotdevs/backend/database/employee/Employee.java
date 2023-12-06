@@ -102,4 +102,8 @@ public class Employee
         this.hourlyPay = hourlyPay;
     }
 
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
 }
