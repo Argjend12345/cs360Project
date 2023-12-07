@@ -25,9 +25,10 @@ function payEmployee() {
         setIsLoading(false);
         setIsSuccess(true);
         setTimeout(() => {
+          Router.push('/accountant/accountantHome'); 
           setIsSuccess(false);
         }, 2000)
-      }, 3000);
+      }, 2000);
     }, 0);
   }
 

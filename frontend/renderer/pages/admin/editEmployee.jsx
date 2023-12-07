@@ -9,6 +9,8 @@ import axios from 'axios'
 import { AES256Encryption } from '../../components/AES256Encryption';
 import { SHA256Hashing } from '../../components/SHA256Hashing';
 
+const { ipcRenderer } = require('electron');
+
 function editEmployee() {
 
   //Encoding pass & hash
@@ -152,7 +154,7 @@ function editEmployee() {
 
   const getEmployeeById = async (employeeId) => {
     try {
-      const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTg3NDc5MiwiZXhwIjoxNzAxOTEwNzkyfQ.GnXPwd_i4T0ex-QuB-Mh8v8awM6F5DmELmZuSnh7dec'; // Replace with your actual token
+      const token = ipcRenderer.sendSync('getToken'); // Replace with your actual token
       const response = await axios.get(
         `http://localhost:8080/employee/${employeeId}`,
         {
@@ -189,8 +191,7 @@ function editEmployee() {
         },
         {
           headers: {
-            Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTg3NDc5MiwiZXhwIjoxNzAxOTEwNzkyfQ.GnXPwd_i4T0ex-QuB-Mh8v8awM6F5DmELmZuSnh7dec'
-            //ipcRenderer.sendSync('getToken')
+            Authorization: 'Bearer ' + ipcRenderer.sendSync('getToken')
           }
         }
       );
@@ -349,8 +350,7 @@ const handleClientShifts = async (shiftId, employeeId) =>
       },
       {
         headers: {
-          Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTg3NDc5MiwiZXhwIjoxNzAxOTEwNzkyfQ.GnXPwd_i4T0ex-QuB-Mh8v8awM6F5DmELmZuSnh7dec'
-          //ipcRenderer.sendSync('getToken')
+          Authorization: 'Bearer ' + ipcRenderer.sendSync('getToken')
         }
       }
     );
