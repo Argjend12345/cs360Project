@@ -7,7 +7,6 @@ import com.example.honeypotdevs.backend.database.shift.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -61,9 +60,6 @@ public class EmployeeController
     {
         employeeService.editEmployee(employee, id);
     }
-
-    //employee/{id}/paystubs/create
-
     @RequestMapping(method = RequestMethod.POST, value = "/employee/{id}/paystubs/create")
     public void createEmployeePaystub(@PathVariable int id)
     {

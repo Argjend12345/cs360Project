@@ -1,13 +1,14 @@
 package com.example.honeypotdevs.backend.security.auth;
 
-public class AuthRequest {
+public class AuthRequest
+{
     private String user;
     private String pass;
 
-    public AuthRequest() {
-    }
+    public AuthRequest() {}
 
-    public AuthRequest(String user, String pass) {
+    public AuthRequest(String user, String pass)
+    {
         this.user = user;
         this.pass = pass;
     }

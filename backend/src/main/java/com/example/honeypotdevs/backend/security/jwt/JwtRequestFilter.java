@@ -39,30 +39,20 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             jwt = URLDecoder.decode(jwt, "UTF-8"); // Decode the token
 
             username = jwtUtil.extractUsername(jwt);
-            System.out.println("USER: " + username);//Did get to here. and it did give me proper username
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null)
         {
-            System.out.println("HERE.");
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-            System.out.println("Here2.");
-
-
             if (jwtUtil.validateToken(jwt, userDetails))
             {
-                System.out.println("Here3.");
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
-                System.out.println("Here4.");
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                System.out.println("Here5.");
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                System.out.println("here6.");
             }
         }
         chain.doFilter(request, response);
     }
-
 }

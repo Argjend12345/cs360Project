@@ -1,6 +1,7 @@
 package com.example.honeypotdevs.backend.security.auth;
 
-public class AuthResponse {
+public class AuthResponse
+{
     private String token;
 
     private String role;
@@ -13,7 +14,6 @@ public class AuthResponse {
         this.token = token;
         this.role = role;
     }
-
     public String getToken() {
         return token;
     }
