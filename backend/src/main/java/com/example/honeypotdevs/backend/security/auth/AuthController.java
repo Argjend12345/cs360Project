@@ -10,14 +10,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class AuthController {
+public class AuthController
+{
 
     private final CustomEmployeeDetailsService customEmployeeDetailsService;
     private final JwtTokenUtil jwtTokenUtil;
     private static final AES256Encryption encryper = new AES256Encryption();
 
     @Autowired
-    public AuthController(CustomEmployeeDetailsService customEmployeeDetailsService, JwtTokenUtil jwtTokenUtil) {
+    public AuthController(CustomEmployeeDetailsService customEmployeeDetailsService, JwtTokenUtil jwtTokenUtil)
+    {
         this.customEmployeeDetailsService = customEmployeeDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;
     }

@@ -2,7 +2,6 @@ package com.example.honeypotdevs.backend.database.shift;
 
 import com.example.honeypotdevs.backend.database.employee.Employee;
 import jakarta.persistence.*;
-
 import java.time.LocalTime;
 
 @Entity
@@ -15,12 +14,9 @@ public class Shift
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
-
     private int shiftId;
     private LocalTime clockIn;
-
     private LocalTime clockOut;
-
     private boolean isScheduled;
 
     public Shift(Employee e, int shiftId)
@@ -32,9 +28,7 @@ public class Shift
         this.isScheduled = false;
     }
 
-    public Shift() {
-
-    }
+    public Shift() {}
 
     public int getShiftId() {
         return shiftId;
@@ -43,7 +37,6 @@ public class Shift
     public void setShiftId(int shiftId) {
         this.shiftId = shiftId;
     }
-
 
     public LocalTime getClockIn() {
         return clockIn;

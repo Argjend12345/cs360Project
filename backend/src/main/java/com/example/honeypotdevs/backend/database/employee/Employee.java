@@ -5,7 +5,6 @@ import com.example.honeypotdevs.backend.database.shift.Shift;
 import com.example.honeypotdevs.backend.security.AES256Encryption;
 import com.example.honeypotdevs.backend.security.SHA256Hashing;
 import jakarta.persistence.*;
-
 import java.util.Set;
 
 @Entity
@@ -69,7 +68,6 @@ public class Employee
         String hashedPass = SHA256Hashing.hash(password); // Hash the password
         this.password = AES256Encryption.encrypt(hashedPass); // Encrypt the hashed password & store to db.
     }
-
     public String getRole() {
         return role;
     }

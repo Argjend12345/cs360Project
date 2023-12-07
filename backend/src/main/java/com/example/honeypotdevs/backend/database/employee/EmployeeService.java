@@ -1,10 +1,7 @@
 package com.example.honeypotdevs.backend.database.employee;
 
-import com.example.honeypotdevs.backend.database.shift.Shift;
-import com.example.honeypotdevs.backend.database.shift.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +28,6 @@ public class EmployeeService {
     {
         return Optional.ofNullable(employeeRepository.findByUsername(username));
     }
-
     public void addEmployee(Employee employee)
     {
         employeeRepository.save(employee);
@@ -50,7 +46,6 @@ public class EmployeeService {
 
         employeeRepository.save(e);
     }
-
     public void removeEmployee(int id)
     {
         employeeRepository.deleteById(id);

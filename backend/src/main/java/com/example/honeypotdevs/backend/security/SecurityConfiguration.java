@@ -24,20 +24,16 @@ public class SecurityConfiguration
 
     @Autowired
     private EmployeeDetailsService employeeDetailsService;
-
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
     private final CustomEmployeeDetailsService customEmployeeDetailsService;
-
     public SecurityConfiguration(CustomEmployeeDetailsService customEmployeeDetailsService)
     {
         this.customEmployeeDetailsService = customEmployeeDetailsService;
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
-        //http.cors();
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers( "/auth").anonymous()
