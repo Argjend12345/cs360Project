@@ -48,7 +48,7 @@ function retrievePaystub() {
     { id: 2, payWeek: '11/26/23 - 12/3/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 38, grossPay: 570, percentDeduction: 10, netPay: 513},
     { id: 3, payWeek: '11/19/23 - 11/26/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 40, grossPay: 600, percentDeduction: 10, netPay: 540},
     { id: 4, payWeek: '11/12/23 - 11/19/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 39, grossPay: 585, percentDeduction: 10, netPay: '526.50'},
-    { id: 5, payWeek: '11/5/23 - 11/12/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 41, grossPay: 615, percentDeduction: 10, netPay: '553.50'},
+    { id: 5, payWeek: '11/5/23 - 11/12/23', name: 'Candace Hill', hourlyPay: 15, hoursWorked: 40, grossPay: 615, percentDeduction: 10, netPay: '553.50'},
   ]);
 
   return (

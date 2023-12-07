@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Head from 'next/head'
 import Styles from '../stylesheets/homepage.module.scss';
-import Styles1 from '../stylesheets/buttonComponent.module.scss';
+import ButtonStyle from '../stylesheets/loadButton.module.scss';
 import axios from 'axios'
 import Router from 'next/router';
 import { AES256Encryption } from '../components/AES256Encryption';
@@ -41,11 +41,11 @@ function loginPage() {
             {
               Router.push('admin/adminHome');
             }else{
-              if(role == "ROLE_EMPLOYEE")
+              if(role == "ROLE_Employee")
               {
                 Router.push('employee/employeeHome');
               }else{
-                if(role == "ROLE_ACCOUNTANT")
+                if(role == "ROLE_Accountant")
                 {
                   Router.push('accountant/accountantHome');
                 }
@@ -68,14 +68,6 @@ function loginPage() {
       console.error(error);
     }
   };
-
-  // REMOVE THIS FUNCTION
-  const logIn = () => {
-      Router.push('admin/adminHome');
-      //Router.push('employee/employeeHome');
-      //Router.push('accountant/accountantHome');
-  }
-  // ----------------------------------------------------
 
   return (
     <React.Fragment>
@@ -104,13 +96,13 @@ function loginPage() {
       <div style={{paddingBottom: "15px"}}></div>
 
       <div style={{textAlign: 'center'}}>   
-        <button id="submitB" onClick={logIn} className={`${Styles1.button} ${isLoading ? Styles1.loader : ''} ${isSuccess ? Styles1.success : ''} ${isError ? Styles1.error : ''}`} style={{height: "50px", width: "200px"}}>
+        <button id="submitB" onClick={handleSubmit} className={`${ButtonStyle.button} ${isLoading ? ButtonStyle.loader : ''} ${isSuccess ? ButtonStyle.success : ''} ${isError ? ButtonStyle.error : ''}`}>
           {isSuccess ? 'Success' : isError ? 'Error' : 'Submit'}
-        </button> 
+        </button>
       </div>
 
       <div style={{textAlign: 'center', marginTop: "12px"}}>   
-        <a href="/forgotPassword">Forgot your password?</a>
+        <a onClick={(e) =>Router.push('/forgotPassword')}>Forgot your password?</a>
       </div>
 
     </React.Fragment>
