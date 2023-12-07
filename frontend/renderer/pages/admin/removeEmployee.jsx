@@ -6,6 +6,8 @@ import Styles1 from '../../stylesheets/buttonComponent.module.scss';
 import ButtonStyle from '../../stylesheets/loadButton.module.scss';
 import axios from 'axios'
 
+const { ipcRenderer } = require('electron');
+
 function removeEmployee() {
 
   //Button loading
@@ -53,8 +55,7 @@ function removeEmployee() {
         'http://localhost:8080/employee/' + id,
         {
           headers: {
-            Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTg3NDc5MiwiZXhwIjoxNzAxOTEwNzkyfQ.GnXPwd_i4T0ex-QuB-Mh8v8awM6F5DmELmZuSnh7dec'
-            //ipcRenderer.sendSync('getToken')
+            Authorization: 'Bearer ' + ipcRenderer.sendSync('getToken')
           }
         }
       );

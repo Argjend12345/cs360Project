@@ -9,7 +9,8 @@ import axios from 'axios'
 
 const { ipcRenderer } = require('electron');
 
-function addEmployee() {
+function addEmployee() 
+{
 
   // Store employee data
   const [selectedRole, setSelectedRole] = useState(null);
@@ -38,7 +39,7 @@ function addEmployee() {
     setSelectedRole(role);
     setIsOpen(false);
   };
-  const roles = ['Employee', 'Admin', 'Accountant',];
+  const roles = ['Employee', 'Admin', 'Accountant'];
   // Dropdown functions
   const [isOpen, setIsOpen] = useState(false);
 
@@ -52,6 +53,7 @@ function addEmployee() {
         let isAuthenticated = false;
         if(document.getElementById('content2').style.display === 'none')
         {
+          
           isAuthenticated = await handleEmployeePost();
         }else{
           isAuthenticated = await updateClientShifts();
@@ -106,8 +108,7 @@ function addEmployee() {
         },
         {
           headers: {
-            Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTg3NDc5MiwiZXhwIjoxNzAxOTEwNzkyfQ.GnXPwd_i4T0ex-QuB-Mh8v8awM6F5DmELmZuSnh7dec'
-            //ipcRenderer.sendSync('getToken')
+            Authorization: 'Bearer ' + ipcRenderer.sendSync('getToken')
           }
         }
       );
@@ -280,8 +281,7 @@ const handleClientShifts = async (shiftId, employeeId) =>
       },
       {
         headers: {
-          Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMTg3NDc5MiwiZXhwIjoxNzAxOTEwNzkyfQ.GnXPwd_i4T0ex-QuB-Mh8v8awM6F5DmELmZuSnh7dec'
-          //ipcRenderer.sendSync('getToken')
+          Authorization: 'Bearer ' + ipcRenderer.sendSync('getToken')
         }
       }
     );
